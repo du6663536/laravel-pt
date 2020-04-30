@@ -47,6 +47,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         //
+        $this->mapDesignRoutes();
     }
 
     /**
@@ -76,5 +77,19 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Define the "design" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapDesignRoutes()
+    {
+        Route::middleware('web')
+             ->namespace('App\Http\Controllers\Design')
+             ->group(base_path('routes/design.php'));
     }
 }
