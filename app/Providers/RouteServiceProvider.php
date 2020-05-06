@@ -47,7 +47,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         //
-        $this->mapDesignRoutes();
+        //$this->mapDesignRoutes();
     }
 
     /**
@@ -86,10 +86,10 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapDesignRoutes()
-    {
-        Route::middleware('web')
-             ->namespace('App\Http\Controllers\Design')
-             ->group(base_path('routes/design.php'));
-    }
+    // protected function mapDesignRoutes()
+    // {
+    //     Route::middleware('web')
+    //          ->namespace('App\Http\Controllers\Design')
+    //          ->group(base_path('routes/design.php'));
+    // }
 }
