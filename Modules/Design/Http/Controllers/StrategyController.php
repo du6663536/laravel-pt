@@ -14,7 +14,7 @@ class StrategyController extends Controller
      */
     public function index()
     {
-        echo 123;die;
+        echo 123;die; 
     }
 
 }
