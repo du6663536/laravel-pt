@@ -23,7 +23,7 @@ class DesignController extends Controller
      */
     public function create()
     {
-        return view('design::create');
+        return view('design::create'); 
     }
 
     /**
