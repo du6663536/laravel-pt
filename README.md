@@ -52,6 +52,11 @@ php artisan module:make module-name
 php artisan module:make module-name1 module-name2 module-name3
 ```
 
+五、模块中使用artisan
+```bash
+php artisan module:make-controller Basics Frame
+```
+
 - **[Vehikl](https://vehikl.com/)**
 
 
