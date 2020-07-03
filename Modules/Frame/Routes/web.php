@@ -22,4 +22,8 @@ Route::domain('frame.' . env('APP_DOMAIN'))->group(function () {
         Route::get('index', 'BasicsController@index');//http://frame.lpt.dev/basics/index
     });
 
+    Route::group(['prefix' => 'container'], function () {
+        Route::get('index', 'ContainerController@index');//http://frame.lpt.dev/container/index
+    });
+
 });
