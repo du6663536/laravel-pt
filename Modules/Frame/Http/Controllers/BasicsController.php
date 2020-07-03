@@ -5,6 +5,7 @@ namespace Modules\Frame\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\App;
 
 class BasicsController extends Controller
 {
@@ -14,7 +15,14 @@ class BasicsController extends Controller
      */
     public function index()
     {
-        echo 123;die;
+        // dd(app('Mysql')->getName());
+        // dd(app('Modules\Frame\Services\Api')->getModule()->getName());
+
+        // dd(app('Modules\Frame\Services\Api'));
+        // dd(app('Modules\Frame\Services\Api', ['Mysql']));
+
+        // dd(app());
+        dd(app()->make('Modules\Frame\Services\Api', ['Mysql']));
         return view('frame::index');
     }
 
