@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 // use Modules\Frame\Interfaces\Basics\Api;
 
 use Modules\Frame\Interfaces\Basics\Mysql;
-use \Modules\Frame\Services\Api;
+use Modules\Frame\Services\Api;
 
 class BasicsServiceProvider extends ServiceProvider
 {
@@ -21,12 +21,10 @@ class BasicsServiceProvider extends ServiceProvider
             return new Mysql;
         });
 
-        $this->app->bind('Modules\Frame\Services\Api', function ($app, $moduleName = 'Mysql') {
-            return new Api($app->make($moduleName));
+        $this->app->bind('Modules\Frame\Services\Api', function ($app, $moduleName) {
+            return new Api($app->make(array_pop($moduleName)));
         });
-        // $this->app->bind('Modules\Frame\Services\Api', function ($app) {
-        //     return new Api($app->make('Mysql'));
-        // });
+
     }
 
     /**

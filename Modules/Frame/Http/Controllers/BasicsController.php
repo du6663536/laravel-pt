@@ -15,14 +15,11 @@ class BasicsController extends Controller
      */
     public function index()
     {
-        // dd(app('Mysql')->getName());
-        // dd(app('Modules\Frame\Services\Api')->getModule()->getName());
+        dd(app('Modules\Frame\Services\Api', ['Mysql']));
+        // dd(app()->make('Modules\Frame\Services\Api', ['Mysql']));
 
-        // dd(app('Modules\Frame\Services\Api'));
-        // dd(app('Modules\Frame\Services\Api', ['Mysql']));
+        // dd(app('Modules\Frame\Services\Api', ['Mysql'])->getModule()->getName());
 
-        // dd(app());
-        dd(app()->make('Modules\Frame\Services\Api', ['Mysql']));
         return view('frame::index');
     }
 
