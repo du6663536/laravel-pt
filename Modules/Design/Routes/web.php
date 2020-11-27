@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('design')->group(function() {
-    Route::get('/', 'DesignController@index');//http://www.lpt.dev/design
+    Route::get('/', 'DesignController@index');//http://www.lpt.kf/design
 });
 
 
@@ -24,7 +24,7 @@ Route::domain('design.' . env('APP_DOMAIN'))->group(function () {
     //策略模式中，策略容器（上下文context）并不知道内部策略的详细信息，因为容器并没有实现与内部策略相同的接口，即容器与内部策略只是简单的组合关系，容器只是将内部策略的行为抽取出来，进行了统一的实现。
     //和代理还是很像的（如果 策略容器和内部策略实现相同接口，就和代理一样了）
     Route::group(['prefix' => 'strategy'], function () {
-        Route::get('index', 'StrategyController@index');//http://design.lpt.dev/strategy/index
+        Route::get('index', 'StrategyController@index');//http://design.lpt.kf/strategy/index
     });
     
     //抽象主题  真实主题   代理对象     （简单代理模式中，代理类知道被代理类的行为，因为代理类与被代理类实现的是同一个接口，因此代理类与被代理类的结构是相同的）

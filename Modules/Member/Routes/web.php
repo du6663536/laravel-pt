@@ -20,7 +20,7 @@ Route::prefix('member')->group(function() {
 Route::domain('member.' . env('APP_DOMAIN'))->group(function () {
 
     Route::group(['prefix' => 'member'], function () {
-        Route::get('index', 'MemberController@index');//http://member.lpt.dev/member/index
+        Route::get('index', 'MemberController@index');//http://member.lpt.kf/member/index
     });
 
 });

@@ -19,11 +19,11 @@ Route::prefix('frame')->group(function() {
 
 Route::domain('frame.' . env('APP_DOMAIN'))->group(function () {
     Route::group(['prefix' => 'basics'], function () {
-        Route::get('index', 'BasicsController@index');//http://frame.lpt.dev/basics/index
+        Route::get('index', 'BasicsController@index');//http://frame.lpt.kf/basics/index
     });
 
     Route::group(['prefix' => 'container'], function () {
-        Route::get('index', 'ContainerController@index');//http://frame.lpt.dev/container/index
+        Route::get('index', 'ContainerController@index');//http://frame.lpt.kf/container/index
     });
 
 });
