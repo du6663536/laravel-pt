@@ -64,6 +64,9 @@ php artisan module:make-controller Basics Frame
 
 
 ## mysql数据库
+-sql调试
+-方法一     App\Providers\AppServiceProvider.php 或者指定模块 Modules\Member\Providers\MemberServiceProvider 添加监控
+-方法二     $user  = DB::table('common_member')->where(['member_id' => 2])->dd(); 或 $user  = DB::table('common_member')->where(['member_id' => 2])->dump();    
 
 
 

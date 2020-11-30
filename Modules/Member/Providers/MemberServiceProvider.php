@@ -4,6 +4,7 @@ namespace Modules\Member\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\Facades\DB;
 
 class MemberServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,12 @@ class MemberServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+        //调试
+        // DB::listen(function ($query) {
+        //     echo $query->sql;
+        //     print_r($query->bindings);
+        //     // $query->time
+        // });
     }
 
     /**
