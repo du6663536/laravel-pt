@@ -1,5 +1,6 @@
 {
     "Design": true,
     "Member": true,
-    "Frame": true
+    "Frame": true,
+    "Demo": true
 }

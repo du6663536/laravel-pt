@@ -26,4 +26,12 @@ Route::domain('frame.' . env('APP_DOMAIN'))->group(function () {
         Route::get('index', 'ContainerController@index');//http://frame.lpt.kf/container/index
     });
 
+    Route::group(['prefix' => 'test'], function () {
+        Route::get('index', 'TestController@index');//http://frame.lpt.kf/test/index
+    });
+
+    Route::group(['prefix' => 'collection'], function () {
+        Route::get('index/{name}', 'CollectionController@index');//http://frame.lpt.kf/collection/index/all
+    });
+
 });

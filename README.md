@@ -55,6 +55,7 @@ php artisan module:make module-name1 module-name2 module-name3
 五、模块中使用artisan
 ```bash
 php artisan module:make-controller Basics Frame
+php artisan module:make-model CommonMember Member
 ```
 
 - **[Vehikl](https://vehikl.com/)**

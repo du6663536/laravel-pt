@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Modules\Member\Entities\CommonMember;
+use Modules\Member\Entities\CommonDepartment;
 
 class MemberController extends Controller
 {
@@ -15,8 +17,32 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $user  = DB::table('common_member')->where(['member_id' => 2])->first();
-        print_r($user);die;
+        $departments = new CommonDepartment;
+        $departments = $departments->list();
+
+
+        // $user = new CommonMember;
+        // $user = $user->list();
+
+        //调用的 Illuminate\Database\Eloquent\Model 中的 all,  而model中的all  调用了Illuminate\Database\Eloquent\Builder(模型构造器？) 中的get， 返回 \Illuminate\Database\Eloquent\Collection|static[](返回集合?）
+        $users = CommonMember::all();
+        //find调用的是 Illuminate\Database\Eloquent\Collection(集合操作类？) 返回\Illuminate\Database\Eloquent\Model|static|null（返回的模型？）
+        //toArray调用的是 Illuminate\Database\Eloquent\Model 中的 toArray 返回的是数组（attributesToArray+relationsToArray?）
+        $users = $users->find(1)->toArray(); 
+        print_r($users);die;
+
+
+        // $users = CommonMember::where(['member_id' => 2])
+        // ->first()->toArray();
+        // print_r($users);die;
+
+        // $users = CommonMember::where('pid', 0)
+        // ->orderBy('member_id', 'desc')
+        // ->take(10)
+        // ->get()
+        // ->toArray();
+        // print_r($users);exit;
+
         return view('member::index');
     }
 
@@ -52,7 +78,7 @@ class MemberController extends Controller
 
         //取出一条数据
         //$user  = DB::table('common_member')->where(['member_id' => 2])->dd();//打印sql
-        $user  = DB::table('common_member')->where(['member_id' => 2])->first();
+        $user  = DB::table('common_member')->where(['member_id' => 2])->first();//Illuminate\Database\Query\Builder  (DB方式是用的查询构造器？)  Illuminate\Database\Eloquent\Builder(模型使用的构造器？)
         print_r($user);die;
 
         //分块
