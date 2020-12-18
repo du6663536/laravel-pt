@@ -30,4 +30,12 @@ Route::domain('demo.' . env('APP_DOMAIN'))->group(function () {
         Route::get('multiYield', 'PropertyController@multiYield');
     });
 
+    Route::group(['prefix' => 'orm'], function () {
+        Route::get('favorites', 'OrmController@favorites');
+    });
+
+    Route::group(['prefix' => 'orm'], function () {
+        Route::get('favorites/member', 'OrmController@favoritesMember');
+    });
+
 });
