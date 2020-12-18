@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 class Member extends Model
 {
     // public $id = 1;
+    
 
     protected $fillable = [
         'name', 'email', 'password',
