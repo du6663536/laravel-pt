@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Modules\Member\Entities\CommonMember;
-use Modules\Member\Entities\CommonDepartment;
+use Modules\Member\Models\CommonDepartment;
+use Modules\Member\Models\CommonMember;
 
 class MemberController extends Controller
 {
@@ -17,20 +17,22 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $departments = new CommonDepartment;
-        $departments = $departments->list();
+        // $departments = (new CommonDepartment)->getMemberlist();
+        // $departments = (new CommonDepartment)->getMemberlistWithDepartment();
+        $members = (new CommonMember)->getMemberAndDepartment();
 
-
-        // $user = new CommonMember;
-        // $user = $user->list();
 
         //调用的 Illuminate\Database\Eloquent\Model 中的 all,  而model中的all  调用了Illuminate\Database\Eloquent\Builder(模型构造器？) 中的get， 返回 \Illuminate\Database\Eloquent\Collection|static[](返回集合?）
-        $users = CommonMember::all();
+        // $users = CommonMember::all();
         //find调用的是 Illuminate\Database\Eloquent\Collection(集合操作类？) 返回\Illuminate\Database\Eloquent\Model|static|null（返回的模型？）
         //toArray调用的是 Illuminate\Database\Eloquent\Model 中的 toArray 返回的是数组（attributesToArray+relationsToArray?）
-        $users = $users->find(1)->toArray(); 
-        print_r($users);die;
+        // $users = $users->find(1)->toArray();
+        // dd($users);
 
+        // all 会取出所有数据   加条件要用get
+        // take通过一系列的魔术方法（比如 __callStatic __call ）， 最终调用 Illuminate\Database\Query\Builder  的take 【说明了，模型 可以调用 Database的查询构造器】
+        // $users = CommonMember::take(10)->get();
+        // dd($users);
 
         // $users = CommonMember::where(['member_id' => 2])
         // ->first()->toArray();
@@ -78,14 +80,14 @@ class MemberController extends Controller
 
         //取出一条数据
         //$user  = DB::table('common_member')->where(['member_id' => 2])->dd();//打印sql
-        $user  = DB::table('common_member')->where(['member_id' => 2])->first();//Illuminate\Database\Query\Builder  (DB方式是用的查询构造器？)  Illuminate\Database\Eloquent\Builder(模型使用的构造器？)
+        $user = DB::table('common_member')->where(['member_id' => 2])->first(); //Illuminate\Database\Query\Builder  (DB方式是用的查询构造器？)  Illuminate\Database\Eloquent\Builder(模型使用的构造器？)
         print_r($user);die;
 
         //分块
         DB::table('common_member')->orderBy('member_id')->chunk(100, function ($users) {
             echo count($users);
             foreach ($users as $user) {
-                
+
             }
         });
         die;
