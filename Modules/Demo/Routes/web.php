@@ -38,4 +38,15 @@ Route::domain('demo.' . env('APP_DOMAIN'))->group(function () {
         Route::get('favorites/member', 'OrmController@favoritesMember');
     });
 
+    Route::group(['prefix' => 'orm'], function () {
+        Route::get('samples', 'OrmController@samples');
+    });
+    Route::group(['prefix' => 'orm'], function () {
+        Route::get('extractions', 'OrmController@extractions');
+    });
+
+    Route::group(['prefix' => 'orm'], function () {
+        Route::get('data', 'OrmController@data');
+    });
+    
 });
