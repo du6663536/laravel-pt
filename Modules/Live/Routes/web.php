@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('live')->group(function() {
     Route::get('/', 'LiveController@index');
 });
+
+Route::domain('live.' . env('APP_DOMAIN'))->group(function () {
+    Route::group(['prefix' => 'basics'], function () {
+        Route::get('index', 'BasicsController@index');//http://demo.lpt.kf/basics/index
+    });
+
+    
+});
