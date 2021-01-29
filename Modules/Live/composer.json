@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/live",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Live\\Providers\\LiveServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Live\\": ""
+        }
+    }
+}
