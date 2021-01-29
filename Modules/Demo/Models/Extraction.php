@@ -28,15 +28,15 @@ class Extraction extends Model
     //     );
     // }
 
-    // public function order()
-    // {
-    //     return $this->belongsTo('Modules\Demo\Models\Order', 'order_id', 'order_id');
-    // }
+    public function order()
+    {
+        return $this->belongsTo('Modules\Demo\Models\Order', 'order_id', 'order_id');
+    }
 
-    // public function contract()
-    // {
-    //     return $this->belongsTo('Modules\Demo\Models\Contract', 'contract_id', 'confirm_contract_id');
-    // }
+    public function contract()
+    {
+        return $this->belongsTo('Modules\Demo\Models\Contract', 'contract_id', 'confirm_contract_id');
+    }
 
     public function getExtraction()
     {
@@ -52,7 +52,7 @@ class Extraction extends Model
             // ['sn', '=', 'MJ20201211107']
         ];
 
-        // 16秒 需Sample 模型中 建好 contract 的 hasOneThrough
+        // 需Sample 模型中 建好 contract 的 hasOneThrough  【不考虑，麻烦还查询慢】
         // $data = $this->select('extraction_sn', 'sample_id')->orderBy('sample_id', 'desc')
         // ->with([
         //     'Sample:majorbio_sn,sample_name,sample_id,ngs_order_sample.order_id',
@@ -70,39 +70,40 @@ class Extraction extends Model
         // });
 
 
-        //16 秒 需本类中定义   只需要对应关系建好    【无需定义远程对应关系且更符合对应关系  可以考虑】
-        $data = $this->select('extraction_sn', 'sample_id')->orderBy('sample_id', 'desc')
-        ->with([
-            'Sample:majorbio_sn,sample_name,sample_id,ngs_order_sample.order_id',
-            'Sample.order:order_sn,is_check,contract_id,ngs_order.order_id',
-            'Sample.order.contract:sn,confirm_contract_id'
-        ])
-        ->whereHasIn('Sample', function ($query) use ($sample_where) {
-            $query->where($sample_where);
-        })
-        ->whereHasIn('Sample.order', function ($query) use ($order_where) {
-            $query->where($order_where);
-        })
-        ->whereHasIn('Sample.order.contract', function ($query) use ($contract_where) {
-            $query->where($contract_where);
-        });
-
-        // // 22 秒 需本类中定义   sample order contract  方法 【此方法需要 extraction 关联表中含有 sample_id  order_id  contract_id  实际情况可能不太符合且耗时不是最佳  暂不考虑】
-        // $data = $this->select('extraction_sn', 'sample_id', 'order_id', 'contract_id')->orderBy('sample_id', 'desc')
+        // //只需要对应关系建好    【不考虑，会多联好几张表】
+        // $data = $this->select('extraction_sn', 'sample_id')->orderBy('sample_id', 'desc')
         // ->with([
         //     'Sample:majorbio_sn,sample_name,sample_id,ngs_order_sample.order_id',
-        //     'Order:order_sn,is_check,contract_id,ngs_order.order_id',
-        //     'Contract:sn,confirm_contract_id'
+        //     'Sample.order:order_sn,is_check,contract_id,ngs_order.order_id',
+        //     'Sample.order.contract:sn,confirm_contract_id'
         // ])
         // ->whereHasIn('Sample', function ($query) use ($sample_where) {
         //     $query->where($sample_where);
         // })
-        // ->whereHasIn('Order', function ($query) use ($order_where) {
+        // ->whereHasIn('Sample.order', function ($query) use ($order_where) {
         //     $query->where($order_where);
         // })
-        // ->whereHasIn('Contract', function ($query) use ($contract_where) {
+        // ->whereHasIn('Sample.order.contract', function ($query) use ($contract_where) {
         //     $query->where($contract_where);
         // });
+
+        //需本类中定义   sample order contract  方法 【此方法需要 extraction 关联表中含有 sample_id  order_id  contract_id  实际情况可能不太符合且查询慢  暂不考虑】
+        //【还未找到4表联查合适的模型写法， 也许关联模型不适合做多表联查】
+        $data = $this->select('extraction_sn', 'sample_id', 'order_id', 'contract_id')->orderBy('sample_id', 'desc')
+        ->with([
+            'Sample:majorbio_sn,sample_name,sample_id,ngs_order_sample.order_id',
+            'Order:order_sn,is_check,contract_id,ngs_order.order_id',
+            'Contract:sn,confirm_contract_id'
+        ])
+        ->whereHasIn('Sample', function ($query) use ($sample_where) {
+            $query->where($sample_where);
+        })
+        ->whereHasIn('Order', function ($query) use ($order_where) {
+            $query->where($order_where);
+        })
+        ->whereHasIn('Contract', function ($query) use ($contract_where) {
+            $query->where($contract_where);
+        });
 
         return $data;
     }
