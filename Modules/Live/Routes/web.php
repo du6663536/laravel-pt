@@ -18,9 +18,13 @@ Route::prefix('live')->group(function() {
 });
 
 Route::domain('live.' . env('APP_DOMAIN'))->group(function () {
-    Route::group(['prefix' => 'basics'], function () {
-        Route::get('index', 'BasicsController@index');//http://demo.lpt.kf/basics/index
+    Route::group(['prefix' => 'room'], function () {
+        Route::get('index', 'RoomController@index');//http://live.lpt.kf/room/index
     });
 
-    
+    Route::group(['prefix' => 'video'], function () {
+        Route::get('index', 'VideoController@index');
+        Route::get('clef', 'VideoController@clef');
+    });
+
 });

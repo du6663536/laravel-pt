@@ -11,9 +11,11 @@
 
     </head>
     <body>
+        @include('live::layouts._header')
         @yield('content')
-
+        @include('live::layouts._footer')
         {{-- Laravel Mix - JS File --}}
         {{-- <script src="{{ mix('js/live.js') }}"></script> --}}
+        @yield('scriptsAfterJs')
     </body>
 </html>

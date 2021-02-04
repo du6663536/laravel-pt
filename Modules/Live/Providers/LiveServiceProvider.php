@@ -4,6 +4,7 @@ namespace Modules\Live\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Live\Services\Common\FfmpegService;
 
 class LiveServiceProvider extends ServiceProvider
 {
@@ -39,6 +40,9 @@ class LiveServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->bind('Ffmpeg', function () {
+            return new FfmpegService();
+        });
     }
 
     /**
