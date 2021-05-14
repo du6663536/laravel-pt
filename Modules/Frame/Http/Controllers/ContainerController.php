@@ -32,7 +32,7 @@ class ContainerController extends Controller
             return new XPower;
         });
 
-        // 同上  aaa
+        // 同上  
         $container->bind('ultrabomb', function($container) {
             return new UltraBomb;
         });
