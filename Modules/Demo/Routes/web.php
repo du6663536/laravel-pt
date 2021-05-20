@@ -48,5 +48,9 @@ Route::domain('demo.' . env('APP_DOMAIN'))->group(function () {
     Route::group(['prefix' => 'orm'], function () {
         Route::get('data', 'OrmController@data');
     });
+
+    Route::group(['prefix' => 'query'], function () {
+        Route::get('getList', 'QueryController@getList');//http://demo.lpt.kf/query/getList
+    });
     
 });
