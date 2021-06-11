@@ -52,10 +52,12 @@ php artisan module:make module-name
 php artisan module:make module-name1 module-name2 module-name3
 ```
 
-五、模块中使用artisan
+五、模块中使用artisan(不建议使用migration)
 ```bash
 php artisan module:make-controller Basics Frame
 php artisan module:make-model CommonMember Member
+php artisan module:make-migration create_images_table Demo
+php artisan module:migrate Demo
 ```
 
 - **[Vehikl](https://vehikl.com/)**
