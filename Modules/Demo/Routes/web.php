@@ -32,22 +32,18 @@ Route::domain('demo.' . env('APP_DOMAIN'))->group(function () {
 
     Route::group(['prefix' => 'orm'], function () {
         Route::get('favorites', 'OrmController@favorites');
-    });
-
-    Route::group(['prefix' => 'orm'], function () {
         Route::get('favorites/member', 'OrmController@favoritesMember');
-    });
-
-    Route::group(['prefix' => 'orm'], function () {
         Route::get('samples', 'OrmController@samples');
-    });
-    Route::group(['prefix' => 'orm'], function () {
         Route::get('extractions', 'OrmController@extractions');
+        Route::get('data', 'OrmController@data');
+        Route::get('user_identity_cards', 'OrmController@userIdentityCards')->name('users.identity_cards');
+        Route::get('article_comments', 'OrmController@articleComments')->name('article.comments');
+        Route::get('role_users', 'OrmController@roleUsers')->name('role.users');
+        Route::get('author_famous_books', 'OrmController@authorFamousBooks')->name('author.famous_books');
+        Route::get('author_books', 'OrmController@authorBooks')->name('author.books');
+        Route::get('morph', 'OrmController@morph');
     });
 
-    Route::group(['prefix' => 'orm'], function () {
-        Route::get('data', 'OrmController@data');
-    });
 
     Route::group(['prefix' => 'query'], function () {
         Route::get('getList', 'QueryController@getList');//http://demo.lpt.kf/query/getList

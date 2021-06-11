@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $fillable = [];
+    protected $table = 'users';
 
-    public function favoriteProducts()
-    {
-        return $this->belongsToMany(Product::class, 'user_favorite_products')
-            ->withTimestamps()
-            ->orderBy('user_favorite_products.created_at', 'desc');
+    public function identity_card(){
+        return $this->hasOne('Modules\Demo\Models\IdentityCard', 'user_id', 'id');
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany('Modules\Demo\Models\Role', 'role_user', 'user_id', 'role_id')->withPivot('created_at');
+    }
+
 }

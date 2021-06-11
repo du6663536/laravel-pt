@@ -25,10 +25,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        // DB::listen(function ($query) {
-        //     echo $query->sql;
-        //     print_r($query->bindings);
-        //     // $query->time
-        // });
+        DB::listen(function ($query) {
+            echo $query->sql;
+            print_r($query->bindings);
+            // $query->time
+        });
     }
 }
