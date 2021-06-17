@@ -52,7 +52,7 @@ php artisan module:make module-name
 php artisan module:make module-name1 module-name2 module-name3
 ```
 
-五、模块中使用artisan(不建议使用migration)
+五、模块中使用artisan(不建议使用migration 维护太麻烦 安全性也不高)
 ```bash
 php artisan module:make-controller Basics Frame
 php artisan module:make-model CommonMember Member
