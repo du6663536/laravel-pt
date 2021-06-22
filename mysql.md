@@ -6,3 +6,4 @@
         collation 选择 utf8mb4_general_ci （速度快） 和 utf8mb4_unicode_ci （更精确排序对比   比前者慢）
         strict  关闭严格模式
 222
+333
